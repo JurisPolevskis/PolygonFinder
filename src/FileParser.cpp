@@ -28,6 +28,23 @@ const std::vector<std::vector<int>>& FileParser::getIntTable(const char& delimit
 		table.push_back(int_line);
 	}
 	Debug::print("getIntTable returns:");
-	Debug::print2dObject(table);
+	Debug::print(intTableToString(table));
 	return table;
+}
+
+std::string FileParser::intTableToString(const std::vector<std::vector<int>>& table)
+{
+	std::string message = "Int table:";
+	for (const auto& table_line:table) {
+		std::string str_line = "";
+		bool first_value = true;
+		for (const auto& value:table_line) {
+			if (!first_value) {
+				str_line.append("\t");
+			}
+			str_line.append(std::to_string(value));
+		}
+		message.append("\n" + str_line);
+	}
+	return message;
 }
