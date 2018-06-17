@@ -42,6 +42,7 @@ std::string FileParser::intTableToString(const std::vector<std::vector<int>>& ta
 			if (!first_value) {
 				str_line.append("\t");
 			}
+			first_value = false;
 			str_line.append(std::to_string(value));
 		}
 		message.append("\n" + str_line);
