@@ -11,12 +11,11 @@ class Line
 	public:
 		Line();
 		Line(const Point& start, const Point& end);
-		bool isIntersecting(const Line& line);
-		bool isTouching(const Point& point);
-		Point getIntersectionPoint(const Line& line);
+		bool isIntersecting(const Line& other, Point& intersect_point);
 		std::pair<Point, Point> getEnds();
-		static std::string to_string(Point point);
+		static std::string to_string(Line line);
 	private:
+		bool areColinearLinesOverlapping(const Line& line);
 		Point c_start;
 		Point c_end;
 };

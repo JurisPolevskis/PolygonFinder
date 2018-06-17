@@ -9,8 +9,13 @@ class Point
 	public:
 		Point();
 		Point(const coordinate_t& x, const coordinate_t& y);
-		bool operator==(const Point& point);
-		std::pair<coordinate_t, coordinate_t> getCoordinates();
+		bool operator== (const Point& point);
+		Point operator+ (const Point& point) const;
+		Point operator- (const Point& point) const;
+		coordinate_t operator* (const Point& point);//cross product
+		Point operator* (const coordinate_t& multiplier);
+		coordinate_t getX();
+		coordinate_t getY();
 		static std::string to_string(Point point);
 	private:
 		coordinate_t c_x;
