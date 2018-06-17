@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-//#include "ArgParser.h"
+#include "ArgParser.h"
 //#include "FileParser.h"
 //#include "Line.h"
 //#include "Intersector.h"
@@ -15,15 +15,15 @@ void printUsage() {
 }
 
 int main(int argc, char **argv){
-	//ArgParser args(argc, argv);
-	//if(args.cmdOptionExists("-h") || args.cmdOptionExists("--help")){
-	//	printUsage();
-	//	return 0;
-	//}
-	//const string &in_filename = args.getCmdOption("-f");
-	//const string &out_filename = args.getCmdOption("-o");
-	//const string &delimiters = args.getCmdOption("-d");
-	//if (!in_filename.empty()){
+	ArgParser args(argc, argv);
+	if(args.cmdOptionExists("-h") || args.cmdOptionExists("--help")){
+		printUsage();
+		return 0;
+	}
+	const string &in_filename = args.getCmdOption("-f");
+	const string &out_filename = args.getCmdOption("-o");
+	const string &delimiters = args.getCmdOption("-d");
+	if (!in_filename.empty()){
 		//FileParser input_csv(in_filename);
 		//lines_t lines = input_csv.getLines(delimiters);
 		//Intersector intersector(lines);
