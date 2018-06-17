@@ -7,6 +7,7 @@
 #include "Intersector.h"
 #include "Graph.h"
 #include "PolygonProcessor.h"
+#include "Output.h"
 
 using namespace std;
 
@@ -31,8 +32,8 @@ int main(int argc, char **argv){
 		PolygonProcessor processor(graph.getCycles(), lines);
 		processor.discardZeroLengthSides();
 		processor.discardZeroAreaPolygons();
-		//Output output(out_filename);
-		//output.print(processor.writePolygons());
+		Output output(out_filename);
+		output.print(processor.writePolygons());
 	}
 	else {
 		printUsage();
