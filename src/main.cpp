@@ -4,7 +4,7 @@
 #include "ArgParser.h"
 #include "FileParser.h"
 #include "Line.h"
-//#include "Intersector.h"
+#include "Intersector.h"
 //#include "Graph.h"
 //#include "PolygonProcessor.h"
 
@@ -26,7 +26,7 @@ int main(int argc, char **argv){
 	if (!in_filename.empty()){
 		FileParser input(in_filename);
 		lines_t lines = makeLines(input.getIntTable(delimiters));
-		//Intersector intersector(lines);
+		Intersector intersector(lines);
 		//Graph graph(intersector.getIntersections());
 		//PolygonProcessor processor(graph.getCycles(), lines);
 		//processor.discardZeroLengthSides();
