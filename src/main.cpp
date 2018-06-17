@@ -8,34 +8,46 @@
 #include "Graph.h"
 #include "PolygonProcessor.h"
 #include "Output.h"
+#include "Debug.h"
 
 using namespace std;
 
 void printUsage() {
-	cout << "TODO:Document usage";
+	cout << "TODO:Document usage" << std::endl;
 }
 
-int main(int argc, char **argv){
+bool tryExecute(int argc, char **argv) {
 	ArgParser args(argc, argv);
 	if(args.cmdOptionExists("-h") || args.cmdOptionExists("--help")){
-		printUsage();
-		return 0;
+		Debug::print("Help");
+		return false;
 	}
 	const string &in_filename = args.getCmdOption("-f");
-	const string &out_filename = args.getCmdOption("-o");
-	const string &delimiters = args.getCmdOption("-d");
-	if (!in_filename.empty()){
-		FileParser input(in_filename);
-		lines_t lines = makeLines(input.getIntTable(delimiters));
-		Intersector intersector(lines);
-		Graph graph(intersector.getIntersections());
-		PolygonProcessor processor(graph.getCycles(), lines);
-		processor.discardZeroLengthSides();
-		processor.discardZeroAreaPolygons();
-		Output output(out_filename);
-		output.print(processor.writePolygons());
+	if (in_filename.empty()){
+		Debug::print("filename empty");
+		return false;
 	}
-	else {
+	const string &out_filename = args.getCmdOption("-o");
+	const string &delimiter = args.getCmdOption("-d", "\t");
+	if (delimiter.size() > 1) {
+		Debug::print("Delimiter \"" + delimiter + "\" size too large:" + to_string(delimiter.size()) );
+		return false;
+	}
+	FileParser input(in_filename);
+	lines_t lines = makeLines(input.getIntTable(delimiter[0]));
+	Intersector intersector(lines);
+	Graph graph(intersector.getIntersections());
+	PolygonProcessor processor(graph.getCycles(), lines);
+	processor.discardZeroLengthSides();
+	processor.discardZeroAreaPolygons();
+	Output output(out_filename);
+	output.print(processor.writePolygons());
+	return true;
+}
+
+int main(int argc, char **argv)
+{
+	if (!tryExecute(argc, argv)) {
 		printUsage();
 	}
     return 0;
