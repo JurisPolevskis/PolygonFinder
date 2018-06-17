@@ -1,7 +1,7 @@
 #based on http://www.partow.net/programming/makefile/index.html
 
 CXX      := g++
-CXXFLAGS := -std=c++11 -Wall -Werror -g
+CXXFLAGS := -std=c++11 -Wall -Werror
 #CXXFLAGS += -pedantic-errors -Wextra #Add these when basic funcions implemented
 LDFLAGS  := -L/usr/lib -lstdc++ -lm
 BUILD    := ./build
@@ -23,7 +23,7 @@ $(APP_DIR)/$(TARGET): $(OBJECTS)
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -o $(APP_DIR)/$(TARGET) $(OBJECTS) $(INCLUDE) $(LDFLAGS) 
 
-.PHONY: all build clean
+.PHONY: all build clean debug release
 
 build:
 	@mkdir -p $(APP_DIR)
@@ -32,3 +32,9 @@ build:
 clean:
 	-@rm -rvf $(OBJ_DIR)/*
 	-@rm -rvf $(APP_DIR)/*
+	
+debug: CXXFLAGS += -DDEBUG -g
+debug: all
+
+release: CXXFLAGS += -O2
+release: all
