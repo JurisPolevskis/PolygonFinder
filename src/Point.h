@@ -6,7 +6,7 @@ class Point
 {
 	public:
 		Point();
-		Point(const coordinate_t& x,const coordinate_t& y);
+		Point(const coordinate_t& x, const coordinate_t& y);
 		bool operator==(const Point& point);
 	private:
 		coordinate_t c_x;
