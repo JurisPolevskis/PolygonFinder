@@ -1,7 +1,7 @@
 #based on http://www.partow.net/programming/makefile/index.html
 
 CXX      := g++
-CXXFLAGS := -std=c++11 -Wall -Werror
+CXXFLAGS := -std=c++17 -Wall -Werror
 #CXXFLAGS += -pedantic-errors -Wextra #Add these when basic funcions implemented
 LDFLAGS  := -L/usr/lib -lstdc++ -lm
 BUILD    := ./build
