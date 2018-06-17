@@ -19,12 +19,16 @@ bool ArgParser::cmdOptionExists(const std::string& option)
 	return (std::find(c_tokens.begin(), c_tokens.end(), option) != c_tokens.end());
 }
 
-const std::string& ArgParser::getCmdOption(const std::string& option)
+std::string ArgParser::getCmdOption(const std::string& option, const std::string& default_value)
 {
 	auto it = std::find(c_tokens.begin(), c_tokens.end(), option);
 	if (it != c_tokens.end() && (it + 1) != c_tokens.end()) {
 		return *(it + 1);
 	}
-	static const std::string empty_string = "";
-	return empty_string;
+	return default_value;
+}
+
+std::string ArgParser::getCmdOption(const std::string& option)
+{
+	return getCmdOption(option, "");
 }
