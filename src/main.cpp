@@ -6,7 +6,7 @@
 #include "Line.h"
 #include "Intersector.h"
 #include "Graph.h"
-//#include "PolygonProcessor.h"
+#include "PolygonProcessor.h"
 
 using namespace std;
 
@@ -28,11 +28,11 @@ int main(int argc, char **argv){
 		lines_t lines = makeLines(input.getIntTable(delimiters));
 		Intersector intersector(lines);
 		Graph graph(intersector.getIntersections());
-		//PolygonProcessor processor(graph.getCycles(), lines);
-		//processor.discardZeroLengthSides();
-		//processor.discardZeroAreaPolygons();
+		PolygonProcessor processor(graph.getCycles(), lines);
+		processor.discardZeroLengthSides();
+		processor.discardZeroAreaPolygons();
 		//Output output(out_filename);
-		//output.print(processor.printPolygons());
+		//output.print(processor.writePolygons());
 	}
 	else {
 		printUsage();
