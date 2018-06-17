@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ArgParser.h"
-//#include "FileParser.h"
-//#include "Line.h"
+#include "FileParser.h"
+#include "Line.h"
 //#include "Intersector.h"
 //#include "Graph.h"
 //#include "PolygonProcessor.h"
@@ -24,8 +24,8 @@ int main(int argc, char **argv){
 	const string &out_filename = args.getCmdOption("-o");
 	const string &delimiters = args.getCmdOption("-d");
 	if (!in_filename.empty()){
-		//FileParser input_csv(in_filename);
-		//lines_t lines = input_csv.getLines(delimiters);
+		FileParser input(in_filename);
+		lines_t lines = makeLines(input.getIntTable(delimiters));
 		//Intersector intersector(lines);
 		//Graph graph(intersector.getIntersections());
 		//PolygonProcessor processor(graph.getCycles(), lines);
@@ -33,9 +33,9 @@ int main(int argc, char **argv){
 		//processor.discardZeroAreaPolygons();
 		//Output output(out_filename);
 		//output.print(processor.printPolygons());
-	//}
-	//else {
-	//	printUsage();
-	//}
+	}
+	else {
+		printUsage();
+	}
     return 0;
 }
