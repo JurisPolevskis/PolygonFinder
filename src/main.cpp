@@ -5,7 +5,7 @@
 #include "FileParser.h"
 #include "Line.h"
 #include "Intersector.h"
-//#include "Graph.h"
+#include "Graph.h"
 //#include "PolygonProcessor.h"
 
 using namespace std;
@@ -27,7 +27,7 @@ int main(int argc, char **argv){
 		FileParser input(in_filename);
 		lines_t lines = makeLines(input.getIntTable(delimiters));
 		Intersector intersector(lines);
-		//Graph graph(intersector.getIntersections());
+		Graph graph(intersector.getIntersections());
 		//PolygonProcessor processor(graph.getCycles(), lines);
 		//processor.discardZeroLengthSides();
 		//processor.discardZeroAreaPolygons();
