@@ -12,7 +12,7 @@ class Line
 		Line(const Point& start, const Point& end);
 		bool isIntersecting(const Line& line);
 		bool isTouching(const Point& point);
-		Point getIntersectoion(const Line& line);
+		Point getIntersectionPoint(const Line& line);
 	private:
 		Point c_start;
 		Point c_end;

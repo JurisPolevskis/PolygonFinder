@@ -18,7 +18,7 @@ bool isTouching(const Point& point)
 	return false;
 }
 
-Point getIntersectoion(const Line& line)
+Point getIntersectionPoint(const Line& line)
 {
 	//TODO:Implement
 	return Point(0, 0);
