@@ -9,7 +9,7 @@ class FileParser
 	public:
 		FileParser(const std::string& filename);
 		~FileParser();
-		const std::vector<std::vector<int>>& getIntTable(const std::string& delimiters);
+		const std::vector<std::vector<int>>& getIntTable(const char& delimiter);
 	private:
 		std::ifstream c_file;
 };
