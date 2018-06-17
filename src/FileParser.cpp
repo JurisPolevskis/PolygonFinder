@@ -3,6 +3,7 @@
 #include <sstream>
 #include <Debug.h>
 
+
 FileParser::FileParser(const std::string& filename)
 {
 	c_file.open(filename);
@@ -26,6 +27,7 @@ const std::vector<std::vector<int>>& FileParser::getIntTable(const char& delimit
 		}
 		table.push_back(int_line);
 	}
-	Debug::printIntTable(table);
+	Debug::print("getIntTable returns:");
+	Debug::print2dObject(table);
 	return table;
 }
