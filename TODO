@@ -1,0 +1,27 @@
+Critical:
+	Output file in reasonable format
+	In some cases Graph::cycles are in wrong order
+	Fix PolygonProcessor::discardZeroAreaSegmentCycles() : Possibly caused by the abovementioned bug
+	Compare test results with manually calculated ones
+Major:
+	Graph refactoring
+		Graph deals too much with real polygons: either split or rename
+		Rename cycles and other variables to be more representative
+	Move PolygonProcessor functionality to node vsiting stage for massive performance boost
+	Fixing discardZeroAreaSegmentCycles would give false negatives if one of the olygon sides consists of colinear overlapping segments
+	Make more test cases and document exiting:
+		Basic Triangle tests to detect false positives or negatives:
+			tri.csv - basic triangle with line segment ends on vertices
+			tri_long.csv - triangle with line segments longer than vertices
+			tri_in.csv - triangle with non-touching line segment inside
+			tri_touch.csv - triangle where lines touch vertices
+			tri_int.csv - triangle wher lines interset sides without makng polygons
+			tri_narrow.csv - triangle with extreme short to long side ratio for math testing
+		Randomly  generated data tests
+		Stress tests for profiling:
+			single_intersection.csv - large number of lines going through single point - stress test for cycle calculation (unless optimized for it)
+			grid.csv - grid of crossing lines: medium number of intersetions, huge number of valid polygons
+			saw.csv - hugely segmented single polygon: test for cycle detection recursion overflow
+			no_intersec.csv - large numbers of non-intersecing lines for intersection detection testing
+	Investigate if Graph and Intersector both do the same functions leading to them being done twice
+	Document other minor possible bugs, optimizations and refactoring
