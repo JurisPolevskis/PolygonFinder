@@ -1,5 +1,7 @@
 #include "Graph.h"
 
+#include <algorithm>
+
 #include "Debug.h"
 
 Graph::Graph(const intersections_t& intersections)
@@ -24,8 +26,8 @@ void Graph::buildGraph(const intersections_t& intersections)
 			for (const auto& line_id:line_ids1) {
 				if (line_ids2.find(line_id) != line_ids2.end()){
 					if (node_key1 != node_key2) {
-						graph[node_key1].insert(node_key2);
-						graph[node_key2].insert(node_key1);
+						this->graph[node_key1][node_key2].insert(line_id);
+						this->graph[node_key2][node_key1].insert(line_id);
 					}
 				}
 			}
@@ -39,7 +41,7 @@ void Graph::buildGraph(const intersections_t& intersections)
 //One pass starting for every line that has an intersection
 void Graph::calculateCycles()
 {
-	for (const auto& it:graph) {
+	for (const auto& it:this->graph) {
 		auto key = it.first;
 		this->current_start_node = key;
 		//Debug::print("Start Node (" + std::to_string(key->first) + ", " + std::to_string(key->second) + ")");
@@ -49,35 +51,63 @@ void Graph::calculateCycles()
 }
 
 void Graph::visitNode( node_key_t node) {
-	//Debug::print("Depth:" + std::to_string(current_path.size()));
-	//Debug::print("Visiting Node (" + std::to_string(node->first) + ", " + std::to_string(node->second) + ")");
-	current_path.insert(node);
-	for (const auto& next_node:graph[node]) {
-		//Debug::print("Next Node (" + std::to_string(next_node->first) + ", " + std::to_string(next_node->second) + ")");
+	Debug::print("Depth:" + std::to_string(current_path.size()));
+	Debug::print("Visiting Node (" + std::to_string(node->first) + ", " + std::to_string(node->second) + ")");
+	current_path.emplace_back(node);
+	for (const auto& it:this->graph[node]) {
+		const auto& next_node = it.first;
+		Debug::print("Next Node (" + std::to_string(next_node->first) + ", " + std::to_string(next_node->second) + ")");
 		
 		//If return to start add to cycle
 		if (next_node == current_start_node && current_path.size() > 2) {
 			//Debug::print("Start found");
-			cycles.insert(current_path);
+			current_path.emplace_back(next_node);
+			saveCurrentPath();
+			current_path.pop_back();
 		}
-		
 		//If new node visit it
-		else if (current_path.find(next_node) == current_path.end()) {
+		else if ( std::find(current_path.begin(), current_path.end(), next_node) == current_path.end() ) {
 			visitNode(next_node);
 		}
 	}
-	current_path.erase(node);
+	current_path.pop_back();
 }
+
+void Graph::saveCurrentPath()
+{
+	cycle_t cycle;
+	node_key_t prev_value;
+	for (auto it = current_path.begin(); it != current_path.end(); ++it) {
+		if (it == current_path.begin()) {
+			prev_value = *it;
+			continue;
+		}
+		cycle_points_t segment = std::make_pair(prev_value, *it);
+		const auto& connecting_lines = graph[prev_value][*it];
+		cycle.insert(std::make_pair(segment, connecting_lines) );
+		prev_value = *it;
+	}
+	Debug::print(cycleToString(cycle));
+	cycles.insert(cycle);
+}
+
 
 std::string Graph::cycleToString(const cycle_t& cycle){
 	std::string message = "(";
 	bool first_value = true;
 	for (const auto& it:cycle) {
 		if (!first_value) {
-			message.append("->");
+			message.append("\t");
 		}
 		first_value = false;
-		message.append( "(" + std::to_string(it->first) + ", " + std::to_string(it->second) + ")");
+		message.append( nodeIdToString(it.first.first) + "->" + nodeIdToString(it.first.second)  + ":") ;
+		bool first_line = true;
+		for(const auto& line_id:it.second) {
+			if (!first_line) {
+				message.append(", ");
+			}
+			message.append( std::to_string(line_id));
+		}
 	}
 	message.append(")");
 	return message;
@@ -103,8 +133,13 @@ std::string Graph::graphToString()
 				message.append(", ");
 			}
 			first_value = false;
-			message.append( "(" + std::to_string(entry->first) + ", " + std::to_string(entry->second) + ")");
+			message.append( nodeIdToString(entry.first) );
 		}
 	}
 	return message;
+}
+
+std::string Graph::nodeIdToString(node_key_t key) 
+{
+	return ("(" + std::to_string(key->first) + ", " + std::to_string(key->second) + ")");
 }
