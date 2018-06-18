@@ -14,6 +14,7 @@ class Point
 		Point operator- (const Point& point) const;
 		coordinate_t operator* (const Point& point);//cross product
 		Point operator* (const coordinate_t& multiplier);
+		std::pair<coordinate_t, coordinate_t> getCoordinates();
 		coordinate_t getX() const;
 		coordinate_t getY() const;
 		static std::string to_string(Point point);

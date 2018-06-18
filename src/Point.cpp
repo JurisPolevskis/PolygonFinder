@@ -1,4 +1,4 @@
-#include <Point.h>
+#include "Point.h"
 
 Point::Point()
 {
@@ -40,6 +40,11 @@ coordinate_t Point::operator* (const Point& other)//cross product
 Point Point::operator* (const coordinate_t& multiplier)
 {
 	return Point(this->x * multiplier,	this->y * multiplier);
+}
+
+std::pair<coordinate_t, coordinate_t> Point::getCoordinates()
+{
+	return std::make_pair(this->x, this->y);
 }
 
 coordinate_t Point::getX() const

@@ -1,6 +1,6 @@
-#include <Intersector.h>
+#include "Intersector.h"
 
-#include <Debug.h>
+#include "Debug.h"
 
 Intersector::Intersector(const lines_t& lines)
 {
@@ -25,9 +25,11 @@ void Intersector::calculateIntersections(const lines_t& lines)
 			line_id_t id2 = it2->first;
 			Line line1 = it->second;
 			Line line2 = it2->second;
-			std::optional <Point> point;
+			Point point;
 			if (line1.isIntersecting(line2, point)) {
-				this->intersections[ std::make_pair(id1, id2) ] = point;
+				intersection_key_t coordinates = point.getCoordinates();
+				this->intersections[ coordinates ].insert(id1);
+				this->intersections[ coordinates ].insert(id2);
 			}
 		}
 	}
@@ -38,9 +40,13 @@ void Intersector::calculateIntersections(const lines_t& lines)
 std::string Intersector::intersectionsToString(){
 	std::string message = "Intersections:";
 	for (const auto& [key, value]:this->intersections) {
-		message.append("\n" + std::to_string(key.first) + "->" + std::to_string(key.second));
-		if (value) {
-			message.append("=" + Point::to_string(value.value()));
+		message.append("\n" + std::to_string(key.first) + "," + std::to_string(key.second) + "=");
+		bool first_value = true;
+		for (const auto& it:value) {
+			if (!first_value) {
+				message.append(", ");
+			}
+			message.append(std::to_string(it));
 		}
 	}
 	return message;

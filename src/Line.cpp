@@ -1,6 +1,6 @@
-#include <Line.h>
+#include "Line.h"
 
-#include <Debug.h>
+#include "Debug.h"
 
 Line::Line()
 {
@@ -17,7 +17,7 @@ Line::Line(const Point& start, const Point& end)
 //Given lines p->(p+r) and q->(q+s)
 //We calculate coefficients t and u
 //Where Intersection at p+tr = q+us
-bool Line::isIntersecting(const Line& other, std::optional<Point>& intersect_point)
+bool Line::isIntersecting(const Line& other, Point& intersect_point)
 {
 	Point p = this->start;
 	Point q = other.start;
@@ -27,7 +27,8 @@ bool Line::isIntersecting(const Line& other, std::optional<Point>& intersect_poi
 	if (r*s == 0) { //parralel lines
 		if ((q-p)*r == 0) { //colinear lines
 			if (areColinearLinesOverlapping(other)) {
-				//Don't set intersection point
+				//Any point will do
+				intersect_point = this->start;
 				return true;
 			}
 			return false;
@@ -60,19 +61,6 @@ bool Line::areColinearLinesOverlapping(const Line& other) {
 	
 	coordinate_t l2_min_y = std::min(other.start.getY(), other.end.getY());
 	coordinate_t l2_max_y = std::max(other.start.getY(), other.end.getY());
-	
-	//Debug::print("l1_min_x: " + std::to_string(l1_min_x));
-	//Debug::print("l1_max_x: " + std::to_string(l1_max_x));
-	//Debug::print("l2_min_x: " + std::to_string(l2_min_x));
-	//Debug::print("l2_max_x: " + std::to_string(l2_max_x));
-	//Debug::print("l1_max_y: " + std::to_string(l1_max_y));
-	//Debug::print("l2_min_y: " + std::to_string(l2_min_y));
-	//Debug::print("l2_max_y: " + std::to_string(l2_max_y));
-	//
-	//Debug::print("l1_max_x < l2_min_x: " + std::to_string(l1_max_x < l2_min_x));
-	//Debug::print("l1_min_x > l2_max_x: " + std::to_string(l1_min_x > l2_max_x));
-	//Debug::print("l1_max_y < l2_min_y: " + std::to_string(l1_max_y < l2_min_y));
-	//Debug::print("l1_min_y > l2_max_y: " + std::to_string(l1_min_y > l2_max_y));
 	
 	return !( (l1_max_x < l2_min_x || l1_min_x > l2_max_x) 
 				|| (l1_max_y < l2_min_y || l1_min_y > l2_max_y) );

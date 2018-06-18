@@ -1,10 +1,13 @@
 #pragma once
 
 #include <map>
+#include <set>
 #include "Line.h"
 #include "Point.h"
 
-typedef std::map< std::pair<line_id_t, line_id_t>,  std::optional<Point> > intersections_t;
+typedef std::pair<coordinate_t, coordinate_t> intersection_key_t;
+typedef std::set <line_id_t> intersection_value_t;
+typedef std::map< intersection_key_t,  intersection_value_t> intersections_t;
 
 class Intersector
 {
