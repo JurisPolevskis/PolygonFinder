@@ -2,7 +2,7 @@
 
 PolygonProcessor::PolygonProcessor(const cycles_t& cycles, const lines_t& lines)
 {
-	c_polygons = makePolygons(cycles, lines);
+	this->polygons = makePolygons(cycles, lines);
 }
 
 const std::string& PolygonProcessor::writePolygons()

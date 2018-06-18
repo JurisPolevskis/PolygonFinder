@@ -13,5 +13,5 @@ class Graph
 		const cycles_t& getCycles();
 	private:
 		cycles_t calculateCycles(const intersections_t& intersections);
-		cycles_t c_cycles;
+		cycles_t cycles;
 };

@@ -12,7 +12,7 @@ class Polygon
 		Polygon(const lines_t& sides);
 		area_t getArea();
 	private:
-		lines_t c_sides;
+		lines_t sides;
 };
 
 inline bool operator== (const Polygon& p1, const Polygon& p2)

@@ -11,5 +11,5 @@ class ArgParser
 		std::string getCmdOption(const std::string& option, const std::string& default_value);
 		std::string getCmdOption(const std::string& option);
 	private:
-		std::vector <std::string> c_tokens;
+		std::vector <std::string> tokens;
 };

@@ -7,49 +7,49 @@ Point::Point()
 
 Point::Point(const coordinate_t& x,const coordinate_t& y)
 {
-	c_x = x;
-	c_y = y;
+	this->x = x;
+	this->y = y;
 }
 
-bool Point::operator== (const Point& point)
+bool Point::operator== (const Point& other)
 {
-	return (c_x == point.c_x &&	c_y == point.c_y);
+	return (this->x == other.x &&	this->y == other.y);
 }
 
-Point Point::operator+ (const Point& point) const
+Point Point::operator+ (const Point& other) const
 {
 	Point ret;
-	ret.c_x = c_x + point.c_x;
-	ret.c_y = c_y + point.c_y;
+	ret.x = this->x + other.x;
+	ret.y = this->y + other.y;
 	return ret;
 }
 
-Point Point::operator- (const Point& point) const
+Point Point::operator- (const Point& other) const
 {
 	Point ret;
-	ret.c_x = c_x - point.c_x;
-	ret.c_y = c_y - point.c_y;
+	ret.x = this->x - other.x;
+	ret.y = this->y - other.y;
 	return ret;
 }
 
-coordinate_t Point::operator* (const Point& point)//cross product
+coordinate_t Point::operator* (const Point& other)//cross product
 {
-	return (c_x * point.c_y - c_y * point.c_x);
+	return (this->x * other.y - this->y * other.x);
 }
 
 Point Point::operator* (const coordinate_t& multiplier)
 {
-	return Point(c_x * multiplier,	c_y * multiplier);
+	return Point(this->x * multiplier,	this->y * multiplier);
 }
 
 coordinate_t Point::getX()
 {
-	return c_x;
+	return this->x;
 }
 
 coordinate_t Point::getY()
 {
-	return c_y;
+	return this->y;
 }
 
 std::string Point::to_string(Point point)

@@ -14,5 +14,5 @@ class PolygonProcessor
 		void discardZeroAreaPolygons();
 	private:
 		polygons_t makePolygons(const cycles_t& cycles, const lines_t& lines);
-		polygons_t c_polygons;
+		polygons_t polygons;
 };

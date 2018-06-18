@@ -6,20 +6,20 @@
 Output::Output(const std::string& filename)
 {
 	if (!filename.empty()) {
-		c_file.open(filename, std::ios::out);
+		this->file.open(filename, std::ios::out);
 	}
 }
 
 Output::~Output()
 {
-	c_file.close();
+	this->file.close();
 }
 
 void Output::print(const std::string&  str)
 {
 	std::cout << str;
-	if (c_file.is_open()) {
-		c_file << str;
+	if (this->file.is_open()) {
+		this->file << str;
 	}
 }
 

@@ -14,5 +14,5 @@ class Intersector
 		std::string intersectionsToString();
 	private:
 		void calculateIntersections(const lines_t& lines);
-		intersections_t c_intersections;
+		intersections_t intersections;
 };

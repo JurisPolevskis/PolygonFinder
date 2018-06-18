@@ -2,12 +2,12 @@
 
 Graph::Graph(const intersections_t& intersections)
 {
-	c_cycles = calculateCycles(intersections);
+	this->cycles = calculateCycles(intersections);
 }
 
 const cycles_t& Graph::getCycles()
 {
-	return c_cycles;
+	return this->cycles;
 }
 
 cycles_t Graph::calculateCycles(const intersections_t& intersections)

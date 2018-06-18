@@ -6,19 +6,19 @@
 
 FileParser::FileParser(const std::string& filename)
 {
-	c_file.open(filename);
+	this->file.open(filename);
 }
 
 FileParser::~FileParser()
 {
-	c_file.close();
+	this->file.close();
 }
 
 const std::vector<std::vector<int>>& FileParser::getIntTable(const char& delimiter)
 {
 	static std::vector<std::vector<int>> table;
 	std::string line;
-	while ( std::getline(c_file, line) ) {
+	while ( std::getline(this->file, line) ) {
 		std::stringstream linestream(line);
 		std::string data;
 		std::vector<int> int_line;

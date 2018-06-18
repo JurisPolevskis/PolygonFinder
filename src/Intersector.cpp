@@ -9,7 +9,7 @@ Intersector::Intersector(const lines_t& lines)
 
 const intersections_t& Intersector::getIntersections()
 {
-	return c_intersections;
+	return this->intersections;
 }
 
 void Intersector::calculateIntersections(const lines_t& lines)
@@ -27,7 +27,7 @@ void Intersector::calculateIntersections(const lines_t& lines)
 			Line line2 = it2->second;
 			std::optional <Point> point;
 			if (line1.isIntersecting(line2, point)) {
-				c_intersections[ std::make_pair(id1, id2) ] = point;
+				this->intersections[ std::make_pair(id1, id2) ] = point;
 			}
 		}
 	}
@@ -37,7 +37,7 @@ void Intersector::calculateIntersections(const lines_t& lines)
 
 std::string Intersector::intersectionsToString(){
 	std::string message = "Intersections:";
-	for (const auto& [key, value]:c_intersections) {
+	for (const auto& [key, value]:this->intersections) {
 		message.append("\n" + std::to_string(key.first) + "->" + std::to_string(key.second));
 		if (value) {
 			message.append("=" + Point::to_string(value.value()));

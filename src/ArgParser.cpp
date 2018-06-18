@@ -10,19 +10,19 @@ void test() {
 ArgParser::ArgParser(const int& argc, char **argv)
 {
 	for (int i = 1; i < argc; i++) {
-		c_tokens.push_back( std::string(argv[i]) );
+		this->tokens.push_back( std::string(argv[i]) );
 	}
 }
 
 bool ArgParser::cmdOptionExists(const std::string& option)
 {
-	return (std::find(c_tokens.begin(), c_tokens.end(), option) != c_tokens.end());
+	return (std::find(this->tokens.begin(), this->tokens.end(), option) != this->tokens.end());
 }
 
 std::string ArgParser::getCmdOption(const std::string& option, const std::string& default_value)
 {
-	auto it = std::find(c_tokens.begin(), c_tokens.end(), option);
-	if (it != c_tokens.end() && (it + 1) != c_tokens.end()) {
+	auto it = std::find(this->tokens.begin(), this->tokens.end(), option);
+	if (it != this->tokens.end() && (it + 1) != this->tokens.end()) {
 		return *(it + 1);
 	}
 	return default_value;

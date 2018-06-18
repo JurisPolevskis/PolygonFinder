@@ -18,6 +18,6 @@ class Point
 		coordinate_t getY();
 		static std::string to_string(Point point);
 	private:
-		coordinate_t c_x;
-		coordinate_t c_y;
+		coordinate_t x;
+		coordinate_t y;
 };

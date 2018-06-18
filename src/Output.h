@@ -10,5 +10,5 @@ class Output
 		~Output();
 		void print(const std::string&  str);
 	private:
-		std::ofstream c_file;
+		std::ofstream file;
 };

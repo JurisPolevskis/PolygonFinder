@@ -15,9 +15,9 @@ class Line
 		std::pair<Point, Point> getEnds();
 		static std::string to_string(Line line);
 	private:
-		bool areColinearLinesOverlapping(const Line& line);
-		Point c_start;
-		Point c_end;
+		bool areColinearLinesOverlapping(const Line& other);
+		Point start;
+		Point end;
 };
 
 typedef std::map<line_id_t, Line> lines_t;

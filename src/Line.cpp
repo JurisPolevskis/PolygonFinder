@@ -9,8 +9,8 @@ Line::Line()
 
 Line::Line(const Point& start, const Point& end)
 {
-	c_start = start;
-	c_end = end;
+	this->start = start;
+	this->end = end;
 }
 
 //https://stackoverflow.com/a/565282
@@ -19,10 +19,10 @@ Line::Line(const Point& start, const Point& end)
 //Where Intersection at p+tr = q+us
 bool Line::isIntersecting(const Line& other, std::optional<Point>& intersect_point)
 {
-	Point p = this->c_start;
-	Point q = other.c_start;
-	Point r = this->c_end - this->c_start;
-	Point s = other.c_end - other.c_start;
+	Point p = this->start;
+	Point q = other.start;
+	Point r = this->end - this->start;
+	Point s = other.end - other.start;
 	
 	if (r*s == 0) { //parralel lines
 		if ((q-p)*r == 0) { //colinear lines
@@ -55,14 +55,14 @@ bool Line::isIntersecting(const Line& other, std::optional<Point>& intersect_poi
 }
 
 
-bool Line::areColinearLinesOverlapping(const Line& line) {
+bool Line::areColinearLinesOverlapping(const Line& other) {
 	//TODO:Implement
 	return false;
 }
 
 std::pair<Point, Point> Line::getEnds()
 {
-	return std::make_pair(c_start, c_end);
+	return std::make_pair(this->start, this->end);
 }
 
 std::string Line::to_string(Line line)
