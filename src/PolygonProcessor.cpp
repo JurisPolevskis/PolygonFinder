@@ -1,4 +1,4 @@
-#include <PolygonProcessor.h>
+#include "PolygonProcessor.h"
 
 PolygonProcessor::PolygonProcessor(const cycles_t& cycles, const lines_t& lines)
 {
