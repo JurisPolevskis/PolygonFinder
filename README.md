@@ -18,7 +18,7 @@ Functional Overview:
   1) Read integers from csv file
   2) Calculate intersections using https://stackoverflow.com/a/565282 for each line pair
   3) Build intersection graph where each node stores pointers to adjacent nodes and line numbers that connect them
-  4) Using deaph first search with backtracking find cycles - potential olygons
+  4) Using deaph first search with backtracking find cycles - potential polygons
   5) Discard cycles which are not distinc polygons:
     5.a) Discard mirrored polygons
     5.b) Discard polygons with zero area segments
