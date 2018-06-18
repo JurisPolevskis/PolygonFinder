@@ -3,7 +3,6 @@
 #include <set>
 #include "Line.h"
 #include "Graph.h"
-#include "Polygon.h"
 
 class PolygonProcessor
 {

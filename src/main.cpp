@@ -41,7 +41,9 @@ bool tryExecute(int argc, char **argv) {
 	processor.discardMirroredCycles();
 	Debug::print("\ndiscardMirroredCycles\n");
 	Debug::print(graph.cyclesToString());
-	processor.discardZeroAreaSegmentCycles();
+	//processor.discardZeroAreaSegmentCycles();
+	//Debug::print("\ndiscardZeroAreaSegmentCycles\n");
+	//Debug::print(graph.cyclesToString());
 	Output output(out_filename);
 	//output.print();
 	return true;
