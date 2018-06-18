@@ -16,6 +16,7 @@ class Graph
 		std::string cycleToString(const cycle_t& cycle);
 		std::string cyclesToString();
 		std::string graphToString();
+		std::string getOutputString();
 		std::string nodeIdToString(node_key_t key);
 	private:
 		void buildGraph(const intersections_t& intersections);

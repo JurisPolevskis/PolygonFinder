@@ -13,7 +13,10 @@
 using namespace std;
 
 void printUsage() {
-	cout << "TODO:Document usage" << std::endl;
+	cout << "Usage: polygf -f <filename> <options>" << std::endl;
+	cout << "Options:" << std::endl;
+	cout << "         -o <filename> : Output file name" << std::endl;
+	cout << "         -d <delimiter> : Delimiter for input file (default: \"\t\")" << std::endl;
 }
 
 bool tryExecute(int argc, char **argv) {
@@ -45,7 +48,7 @@ bool tryExecute(int argc, char **argv) {
 	//Debug::print("\ndiscardZeroAreaSegmentCycles\n");
 	//Debug::print(graph.cyclesToString());
 	Output output(out_filename);
-	//output.print();
+	output.print(graph.getOutputString());
 	return true;
 }
 

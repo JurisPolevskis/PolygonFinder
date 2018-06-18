@@ -51,12 +51,12 @@ void Graph::calculateCycles()
 }
 
 void Graph::visitNode( node_key_t node) {
-	Debug::print("Depth:" + std::to_string(current_path.size()));
-	Debug::print("Visiting Node (" + std::to_string(node->first) + ", " + std::to_string(node->second) + ")");
+	//Debug::print("Depth:" + std::to_string(current_path.size()));
+	//Debug::print("Visiting Node (" + std::to_string(node->first) + ", " + std::to_string(node->second) + ")");
 	current_path.emplace_back(node);
 	for (const auto& it:this->graph[node]) {
 		const auto& next_node = it.first;
-		Debug::print("Next Node (" + std::to_string(next_node->first) + ", " + std::to_string(next_node->second) + ")");
+		//Debug::print("Next Node (" + std::to_string(next_node->first) + ", " + std::to_string(next_node->second) + ")");
 		
 		//If return to start add to cycle
 		if (next_node == current_start_node && current_path.size() > 2) {
@@ -118,6 +118,15 @@ std::string Graph::cyclesToString(){
 	std::string message = "\nCycles:";
 	for (const auto& cycle:cycles) {
 		message.append("\n" + cycleToString(cycle));
+	}
+	return message;
+}
+
+std::string Graph::getOutputString()
+{
+	std::string message;
+	for (const auto& cycle:cycles) {
+		message.append(cycleToString(cycle) + "\n");
 	}
 	return message;
 }
