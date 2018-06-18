@@ -3,7 +3,9 @@
 #include <set>
 #include "Intersector.h"
 
-typedef std::set<const intersection_key_t*> cycle_t;
+
+typedef const intersection_key_t* node_key_t;
+typedef std::set<node_key_t> cycle_t;
 typedef std::set<cycle_t> cycles_t;
 
 class Graph
@@ -12,12 +14,17 @@ class Graph
 		Graph(const intersections_t& intersections);
 		const cycles_t& getCycles();
 		std::string cycleToString(const cycle_t& cycle);
-		std::string cyclesToString(const cycles_t& cycle);
+		std::string cyclesToString();
+		std::string graphToString();
 	private:
-		void calculateCycles(const intersections_t& intersections);
-		void visitNode(const intersection_key_t* node, const intersections_t& intersections);
+		void buildGraph(const intersections_t& intersections);
+		void calculateCycles();
+		void visitNode(const intersection_key_t* node);
 		cycles_t cycles;
-		std::set< const intersection_key_t* > visited_nodes;
-		std::set< const intersection_key_t* > current_path;
-		const intersection_key_t* current_start_node;
+		std::set< node_key_t > current_path;
+		node_key_t current_start_node;
+		
+		typedef std::set< node_key_t> connections_t;
+		typedef std::map< node_key_t, connections_t > graph_t;
+		graph_t graph;
 };
