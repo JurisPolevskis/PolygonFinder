@@ -21,5 +21,5 @@ class Line
 };
 
 typedef std::map<line_id_t, Line> lines_t;
-lines_t makeLines( std::vector< std::vector<coordinate_t> > table);
+lines_t makeLines( std::vector< std::vector<int> > table);
 std::string linesToString(lines_t lines);

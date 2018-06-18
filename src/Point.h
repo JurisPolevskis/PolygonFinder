@@ -2,7 +2,7 @@
 
 #include <string>
 
-typedef int coordinate_t;
+typedef double coordinate_t;
 
 class Point
 {

@@ -37,10 +37,17 @@ bool Line::isIntersecting(const Line& other, std::optional<Point>& intersect_poi
 		}
 	}
 	else { 
-		coordinate_t t = (q-p)*s/(r*s);
-		coordinate_t u = (q-p)*r/(r*s);
+		double t = (q-p)*s/(r*s);
+		double u = (q-p)*r/(r*s);
 		if ( 0 <= t && t <= 1 && 0 <= u && u <= 1) {
 			intersect_point = p+r*t;
+			Debug::print("p: " + Point::to_string(p));
+			Debug::print("q: " + Point::to_string(q));
+			Debug::print("r: " + Point::to_string(r));
+			Debug::print("s: " + Point::to_string(s));
+			Debug::print("t: " + std::to_string(t));
+			Debug::print("u: " + std::to_string(u));
+			Debug::print("");
 			return true;
 		}
 		return false;
@@ -65,15 +72,15 @@ std::string Line::to_string(Line line)
 	return str;
 }
 
-lines_t makeLines( std::vector< std::vector<coordinate_t> > table)
+lines_t makeLines( std::vector< std::vector<int> > table)
 {
 	lines_t lines;
 	for (const auto& table_line:table) {
 		if (table_line.size() != 5) {
 			throw std::invalid_argument( "makeLines invalid value caount in line" );
 		}
-		Point start(table_line[1], table_line[2]);
-		Point end(table_line[3], table_line[4]);
+		Point start((coordinate_t)table_line[1], (coordinate_t)table_line[2]);
+		Point end((coordinate_t)table_line[3], (coordinate_t)table_line[4]);
 		line_id_t line_id = table_line[0];
 		Line line(start, end);
 		lines[line_id] = line;
