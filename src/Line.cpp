@@ -91,14 +91,13 @@ lines_t makeLines( std::vector< std::vector<int> > table)
 		Line line(start, end);
 		lines[line_id] = line;
 	}
-	Debug::print("makeLines returns:");
 	Debug::print(linesToString(lines));
 	return lines;
 }
 
 std::string linesToString(lines_t lines)
 {
-	std::string message = "Lines:";
+	std::string message = "\nLines:";
 	for (const auto& entry:lines) {
 		message.append("\n " + std::to_string(entry.first) +
 				+ ":\t" + Line::to_string(entry.second) );

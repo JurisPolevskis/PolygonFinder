@@ -85,7 +85,7 @@ std::string Graph::cycleToString(const cycle_t& cycle){
 
 
 std::string Graph::cyclesToString(){
-	std::string message = "Cycles:";
+	std::string message = "\nCycles:";
 	for (const auto& cycle:cycles) {
 		message.append("\n" + cycleToString(cycle));
 	}
@@ -94,7 +94,7 @@ std::string Graph::cyclesToString(){
 
 std::string Graph::graphToString()
 {
-	std::string message = "Graph:";
+	std::string message = "\nGraph:";
 	for (const auto& [key, value]:graph) {
 		message.append("\n(" + std::to_string(key->first) + ", " + std::to_string(key->second) +")->");
 		bool first_value = true;

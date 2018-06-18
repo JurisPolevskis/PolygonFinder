@@ -38,14 +38,15 @@ void Intersector::calculateIntersections(const lines_t& lines)
 
 
 std::string Intersector::intersectionsToString(){
-	std::string message = "Intersections:";
+	std::string message = "\nIntersections:";
 	for (const auto& [key, value]:this->intersections) {
-		message.append("\n" + std::to_string(key.first) + "," + std::to_string(key.second) + "=");
+		message.append("\n(" + std::to_string(key.first) + ", " + std::to_string(key.second) + ") : ");
 		bool first_value = true;
 		for (const auto& it:value) {
 			if (!first_value) {
 				message.append(", ");
 			}
+			first_value = false;
 			message.append(std::to_string(it));
 		}
 	}

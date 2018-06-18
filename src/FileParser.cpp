@@ -27,14 +27,13 @@ const std::vector<std::vector<int>>& FileParser::getIntTable(const char& delimit
 		}
 		table.push_back(int_line);
 	}
-	Debug::print("getIntTable returns:");
 	Debug::print(intTableToString(table));
 	return table;
 }
 
 std::string FileParser::intTableToString(const std::vector<std::vector<int>>& table)
 {
-	std::string message = "Int table:";
+	std::string message = "\nInt table:";
 	for (const auto& table_line:table) {
 		std::string str_line = "";
 		bool first_value = true;
