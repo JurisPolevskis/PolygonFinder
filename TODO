@@ -4,12 +4,13 @@ Critical:
 	Fix PolygonProcessor::discardZeroAreaSegmentCycles() : Possibly caused by the abovementioned bug
 	Compare test results with manually calculated ones
 	Add PolygonProcessor::discardSelfIntersectingPolygons()
+	
 Major:
 	Graph refactoring
 		Graph deals too much with real polygons: either split or rename
 		Rename cycles and other variables to be more representative
-	Move PolygonProcessor functionality to node vsiting stage for massive performance boost
-	Fixing discardZeroAreaSegmentCycles would give false negatives if one of the olygon sides consists of colinear overlapping segments
+	Move PolygonProcessor functionality to node visiting stage for massive performance boost
+	Fixing discardZeroAreaSegmentCycles would give false negatives if one of the polygon sides consists of colinear overlapping segments
 	Make more test cases and document exiting:
 		Basic Triangle tests to detect false positives or negatives:
 			tri.csv - basic triangle with line segment ends on vertices
@@ -27,3 +28,13 @@ Major:
 	Investigate if Graph and Intersector both do the same functions leading to them being done twice
 	Add code comments
 	Document other minor possible bugs, optimizations and refactoring
+	
+Minor:
+	Profile performance
+	Implement unified variable printing format
+	Implement operators and constructors for more variable types
+	makefile add automatic recompiling on debug/release change and header file changes
+	Check code for possible optimizations by replacing copy assignments with references
+	Add different debug verbosity levels called by program argument for easier debugging
+ 
+ 
