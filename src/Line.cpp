@@ -17,31 +17,34 @@ Line::Line(const Point& start, const Point& end)
 //Given lines p->(p+r) and q->(q+s)
 //We calculate coefficients t and u
 //Where Intersection at p+tr = q+us
-bool Line::isIntersecting(const Line& other, Point& intersect_point)
+bool Line::isIntersecting(const Line& other, std::optional<Point>& intersect_point)
 {
 	Point p = this->c_start;
 	Point q = other.c_start;
 	Point r = this->c_end - this->c_start;
 	Point s = other.c_end - other.c_start;
 	
-	coordinate_t t = (q-p)*s/(r*s);
-	coordinate_t u = (q-p)*r/(r*s);
-	
-	if (r*s == 0 && (q-p)*r == 0) { //colinear lines
-		if (areColinearLinesOverlapping(other)) {
-			//Don't set intersection point
+	if (r*s == 0) { //parralel lines
+		if ((q-p)*r == 0) { //colinear lines
+			if (areColinearLinesOverlapping(other)) {
+				//Don't set intersection point
+				return true;
+			}
+			return false;
+		}
+		else { //parallel non-intersecting;
+			return false;
+		}
+	}
+	else { 
+		coordinate_t t = (q-p)*s/(r*s);
+		coordinate_t u = (q-p)*r/(r*s);
+		if ( 0 <= t && t <= 1 && 0 <= u && u <= 1) {
+			intersect_point = p+r*t;
 			return true;
 		}
 		return false;
 	}
-	else if (r*s == 0 && (q-p)*r != 0){//parallel non-intersecting;
-		return false;
-	}
-	else if (r*s != 0 && 0 <= t && t <= 1 && 0 <= u && u <= 1) {
-		intersect_point = p+r*t;
-		return true;
-	}
-	return false;
 }
 
 

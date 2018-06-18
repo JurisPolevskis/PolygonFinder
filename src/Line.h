@@ -11,7 +11,7 @@ class Line
 	public:
 		Line();
 		Line(const Point& start, const Point& end);
-		bool isIntersecting(const Line& other, Point& intersect_point);
+		bool isIntersecting(const Line& other, std::optional<Point>& intersect_point);
 		std::pair<Point, Point> getEnds();
 		static std::string to_string(Line line);
 	private:
