@@ -3,6 +3,7 @@ Critical:
 	In some cases Graph::cycles are in wrong order
 	Fix PolygonProcessor::discardZeroAreaSegmentCycles() : Possibly caused by the abovementioned bug
 	Compare test results with manually calculated ones
+	Add PolygonProcessor::discardSelfIntersectingPolygons()
 Major:
 	Graph refactoring
 		Graph deals too much with real polygons: either split or rename
