@@ -41,13 +41,6 @@ bool Line::isIntersecting(const Line& other, std::optional<Point>& intersect_poi
 		double u = (q-p)*r/(r*s);
 		if ( 0 <= t && t <= 1 && 0 <= u && u <= 1) {
 			intersect_point = p+r*t;
-			Debug::print("p: " + Point::to_string(p));
-			Debug::print("q: " + Point::to_string(q));
-			Debug::print("r: " + Point::to_string(r));
-			Debug::print("s: " + Point::to_string(s));
-			Debug::print("t: " + std::to_string(t));
-			Debug::print("u: " + std::to_string(u));
-			Debug::print("");
 			return true;
 		}
 		return false;
@@ -56,8 +49,33 @@ bool Line::isIntersecting(const Line& other, std::optional<Point>& intersect_poi
 
 
 bool Line::areColinearLinesOverlapping(const Line& other) {
-	//TODO:Implement
-	return false;
+	coordinate_t l1_min_x = std::min(this->start.getX(), this->end.getX());
+	coordinate_t l1_max_x = std::max(this->start.getX(), this->end.getX());
+	
+	coordinate_t l2_min_x = std::min(other.start.getX(), other.end.getX());
+	coordinate_t l2_max_x = std::max(other.start.getX(), other.end.getX());
+	
+	coordinate_t l1_min_y = std::min(this->start.getY(), this->end.getY());
+	coordinate_t l1_max_y = std::max(this->start.getY(), this->end.getY());
+	
+	coordinate_t l2_min_y = std::min(other.start.getY(), other.end.getY());
+	coordinate_t l2_max_y = std::max(other.start.getY(), other.end.getY());
+	
+	//Debug::print("l1_min_x: " + std::to_string(l1_min_x));
+	//Debug::print("l1_max_x: " + std::to_string(l1_max_x));
+	//Debug::print("l2_min_x: " + std::to_string(l2_min_x));
+	//Debug::print("l2_max_x: " + std::to_string(l2_max_x));
+	//Debug::print("l1_max_y: " + std::to_string(l1_max_y));
+	//Debug::print("l2_min_y: " + std::to_string(l2_min_y));
+	//Debug::print("l2_max_y: " + std::to_string(l2_max_y));
+	//
+	//Debug::print("l1_max_x < l2_min_x: " + std::to_string(l1_max_x < l2_min_x));
+	//Debug::print("l1_min_x > l2_max_x: " + std::to_string(l1_min_x > l2_max_x));
+	//Debug::print("l1_max_y < l2_min_y: " + std::to_string(l1_max_y < l2_min_y));
+	//Debug::print("l1_min_y > l2_max_y: " + std::to_string(l1_min_y > l2_max_y));
+	
+	return !( (l1_max_x < l2_min_x || l1_min_x > l2_max_x) 
+				|| (l1_max_y < l2_min_y || l1_min_y > l2_max_y) );
 }
 
 std::pair<Point, Point> Line::getEnds()

@@ -42,12 +42,12 @@ Point Point::operator* (const coordinate_t& multiplier)
 	return Point(this->x * multiplier,	this->y * multiplier);
 }
 
-coordinate_t Point::getX()
+coordinate_t Point::getX() const
 {
 	return this->x;
 }
 
-coordinate_t Point::getY()
+coordinate_t Point::getY() const
 {
 	return this->y;
 }
