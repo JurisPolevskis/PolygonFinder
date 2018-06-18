@@ -1,8 +1,10 @@
 #include <Intersector.h>
 
+#include <Debug.h>
+
 Intersector::Intersector(const lines_t& lines)
 {
-	c_intersections = calculateIntersections(lines);
+	calculateIntersections(lines);
 }
 
 const intersections_t& Intersector::getIntersections()
@@ -10,8 +12,36 @@ const intersections_t& Intersector::getIntersections()
 	return c_intersections;
 }
 
-intersections_t Intersector::calculateIntersections(const lines_t& lines)
+void Intersector::calculateIntersections(const lines_t& lines)
 {
-	intersections_t intersections;
-	return intersections;
+	//Possible optimization: Calculate isIntersecting only if both line x or y coordinates overlap
+	//Possible optimization: Split whole space including lines into chunks and calculate for Intersections for each chunck seperately
+	for (auto it = lines.begin(); it != lines.end(); ++it) {
+		for (auto it2 = it; it2 != lines.end(); ++it2) {
+			if (it == it2) {
+				continue;
+			}
+			line_id_t id1 = it->first;
+			line_id_t id2 = it2->first;
+			Line line1 = it->second;
+			Line line2 = it2->second;
+			std::optional <Point> point;
+			if (line1.isIntersecting(line2, point)) {
+				c_intersections[ std::make_pair(id1, id2) ] = point;
+			}
+		}
+	}
+	Debug::print(intersectionsToString());
+}
+
+
+std::string Intersector::intersectionsToString(){
+	std::string message = "Intersections:";
+	for (const auto& [key, value]:c_intersections) {
+		message.append("\n" + std::to_string(key.first) + "->" + std::to_string(key.second));
+		if (value) {
+			message.append("=" + Point::to_string(value.value()));
+		}
+	}
+	return message;
 }
