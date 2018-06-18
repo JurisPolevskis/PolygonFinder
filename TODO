@@ -24,4 +24,5 @@ Major:
 			saw.csv - hugely segmented single polygon: test for cycle detection recursion overflow
 			no_intersec.csv - large numbers of non-intersecing lines for intersection detection testing
 	Investigate if Graph and Intersector both do the same functions leading to them being done twice
+	Add code comments
 	Document other minor possible bugs, optimizations and refactoring
