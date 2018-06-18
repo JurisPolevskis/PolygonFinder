@@ -12,7 +12,7 @@ class Graph
 {
 	public:
 		Graph(const intersections_t& intersections);
-		const cycles_t& getCycles();
+		cycles_t& getCycles();
 		std::string cycleToString(const cycle_t& cycle);
 		std::string cyclesToString();
 		std::string graphToString();

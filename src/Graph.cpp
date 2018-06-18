@@ -10,7 +10,7 @@ Graph::Graph(const intersections_t& intersections)
 	calculateCycles();
 }
 
-const cycles_t& Graph::getCycles()
+cycles_t& Graph::getCycles()
 {
 	return this->cycles;
 }

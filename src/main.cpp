@@ -37,11 +37,13 @@ bool tryExecute(int argc, char **argv) {
 	lines_t lines = makeLines(input.getIntTable(delimiter[0]));
 	Intersector intersector(lines);
 	Graph graph(intersector.getIntersections());
-	PolygonProcessor processor(graph.getCycles(), lines);
-	processor.discardZeroLengthSides();
-	processor.discardZeroAreaPolygons();
+	PolygonProcessor processor(graph.getCycles());
+	processor.discardMirroredCycles();
+	Debug::print("\ndiscardMirroredCycles\n");
+	Debug::print(graph.cyclesToString());
+	processor.discardZeroAreaSegmentCycles();
 	Output output(out_filename);
-	output.print(processor.writePolygons());
+	//output.print();
 	return true;
 }
 
